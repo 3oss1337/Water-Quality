@@ -51,8 +51,12 @@ def load_model(selected_model):
         return joblib.load(open(r"dc",'rb'))
     elif selected_model == "SVM":
         return joblib.load(open(r"svm",'rb'))
+    elif selected_model == "kNN":
+        return joblib.load(open(r"kNN",'rb'))
+    elif selected_model== "Random Forest":
+        return joblib.load(open(r"randomForest",'rb'))
 
-models = [ "Logistic Regression", "Decision Tree", "SVM"]
+models = [ "Logistic Regression", "Decision Tree", "SVM","kNN","Random Forest"]
 selected_model = st.sidebar.selectbox("Select a Model:", models)
 
 # Load the selected model
@@ -154,6 +158,9 @@ elif choose=='Graphs':
       st.write("BOX PLOTS")
       st.write("---------")
       st.image(r"output.png")
+      st.write("Heatmap")
+      st.write("---------")
+      st.image(r"heatmap.png")
 
       
 
