@@ -1,4 +1,6 @@
 import streamlit as st
+import warnings
+warnings.filterwarnings('ignore')
 import tkinter as tk
 import requests
 import pandas as pd
@@ -59,11 +61,14 @@ def load_model(selected_model):
 models = [ "Logistic Regression", "Decision Tree", "SVM","kNN","Random Forest"]
 selected_model = st.sidebar.selectbox("Select a Model:", models)
 
+
+
 # Load the selected model
 model = load_model(selected_model)
 y_pred = model.predict(X_test_scaled)
 acc = accuracy_score(y_test,y_pred)
 cm = confusion_matrix(y_test, y_pred)
+##st.write(acc)
 
 def predict(ph,Hardness,Solids,Chloramines,Sulfate,Conductivity,Organic_carbon,Trihalomethanes,Turbidity):
      features=np.array([ph,Hardness,Solids,Chloramines,Sulfate,Conductivity,Organic_carbon,Trihalomethanes,Turbidity]).reshape(1,-1)
@@ -137,6 +142,7 @@ if choose=='Home':
                plt.ylabel("True label")
                plt.title("Confusion Matrix")
                st.pyplot()
+               st.set_option('deprecation.showPyplotGlobalUse', False)
                report=classification_report(y_test, y_pred)
                st.text_area('Classification Report:', report, height=400)
 
